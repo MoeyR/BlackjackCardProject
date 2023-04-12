@@ -1,5 +1,6 @@
 package ca.sheridancollege.project;
 
+import static java.lang.System.exit;
 import java.util.Scanner;
 
 /**
@@ -31,7 +32,7 @@ public class BlackJackGameDemo {
         BJPlayer player_1 = new BJPlayer(player_1_name);
         //draw two cards for player
         player_1.getPlayerHand().drawTwoCards(deckOfCards); //GroupOfCards playerHand = new GroupOfCards();
-        System.out.printf("Here are your cards on hand %s: %s %n", player_1.toString(), player_1.getPlayerHand().toString());
+        System.out.printf("Here are your cards on hand, %s: %s %n", player_1.toString(), player_1.getPlayerHand().toString());
         System.out.printf("Your cards value is totaled: %s%n", player_1.getPlayerHand().cardValue() );
     
         // Only 1 dealer
@@ -39,11 +40,13 @@ public class BlackJackGameDemo {
         //draw two cards for dealer
         dealer.getDealerHand().drawTwoCards(deckOfCards); //GroupOfCards dealerHand = new GroupOfCards();
         System.out.println("One of dealer's cards is: " + dealer.getDealerHand().getCardFromGroup(0).toString());
-
+        
+        System.out.println(" ***************************** ");
+        
         // player can choose to hit or stand
         boolean answer = false;
         do{
-            System.out.print("Would you like to 'Hit' or 'STAND'? ");
+            System.out.print("Would you like to 'HIT' or 'STAND'? ");
             String playerAnswer = input.nextLine();
             
             if(playerAnswer.matches("hit") || playerAnswer.matches("HIT") || playerAnswer.matches("Hit")){
@@ -51,12 +54,18 @@ public class BlackJackGameDemo {
                 player_1.getPlayerHand().drawOneCard(deckOfCards);
                 System.out.printf("Here is your new card %s: %s %n", 
                         player_1.toString(), player_1.getPlayerHand().getCardFromGroup(2).toString());
-                System.out.printf("Total value is now: %s%n", player_1.getPlayerHand().cardValue() );
+                if(player_1.getPlayerHand().cardValue() > 21){
+                    System.out.println("Sorry, you lost! Try next time!");
+                    break;
+                }else{
+                    System.out.printf("Your total cards value is now: %s%n", player_1.getPlayerHand().cardValue() );
+                }
+                
                 answer = false;
             }else if(playerAnswer.matches("stand")|| playerAnswer.matches("STAND") || playerAnswer.matches("Stand")){
                 break;
             }else{
-                System.out.print("Please choose to 'Hit' or 'STAND': ");
+                System.out.print("Please choose to 'HIT' or 'STAND': ");
                 answer = true;
             }
         }while(answer);
