@@ -16,7 +16,7 @@ public class BlackJackGameDemo {
         round_1.play();
         
         //BJGame has a deckOfCards of 52 cards
-        GroupOfCards deckOfCards = new GroupOfCards(52); 
+        GroupOfCards deckOfCards = new GroupOfCards(); 
         deckOfCards.getDeckOfCard(); // A deck of all Blackjack Cards: 4 suits x 13 values = 52 cards
         //System.out.println(deckOfCards.getSize());
         
@@ -51,17 +51,26 @@ public class BlackJackGameDemo {
             
             if(playerAnswer.matches("hit") || playerAnswer.matches("HIT") || playerAnswer.matches("Hit")){
                 //draw one card for player
+                
                 player_1.getPlayerHand().drawOneCard(deckOfCards);
                 System.out.printf("Here is your new card %s: %s %n", 
-                        player_1.toString(), player_1.getPlayerHand().getCardFromGroup(2).toString());
-                if(player_1.getPlayerHand().cardValue() > 21){
-                    System.out.println("Sorry, you lost! Try next time!");
+                        player_1.toString(), 
+                        player_1.getPlayerHand().getCardFromGroup(2).toString());
+                
+                if(player_1.getPlayerHand().cardValue() < 21){
+                    System.out.printf("Your total cards value is now: %s%n", player_1.getPlayerHand().cardValue() );
+                    answer = true;
+                    continue;
+                }else if(player_1.getPlayerHand().cardValue() == 21){
+                    System.out.println("Congratulations! You WIN !!!");
                     break;
                 }else{
-                    System.out.printf("Your total cards value is now: %s%n", player_1.getPlayerHand().cardValue() );
+                    System.out.println("Sorry, you lost! Try next time!");
+                    answer = false;
+                    break;
                 }
                 
-                answer = false;
+                //answer = false;
             }else if(playerAnswer.matches("stand")|| playerAnswer.matches("STAND") || playerAnswer.matches("Stand")){
                 break;
             }else{
