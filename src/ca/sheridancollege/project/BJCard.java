@@ -40,9 +40,10 @@ public class BJCard extends Card {
         this.suit = suit;
     }
     
+    // show suit and rank of the card
     @Override
     public String toString() {
-        return "Blackjack cards";
+        return suit.toString() + " " + rank.toString(); // return suit 
     }
 	
     

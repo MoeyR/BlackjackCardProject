@@ -60,7 +60,12 @@ public class BJPlayer extends Player {
 //    }
     
     public void playerHandAddCard(BJCard card){
-        playerHand.addCards(card);
+        playerHand.addCard(card);
         //playerScore += Integer.parseInt(card.getRank());
     }
-}
+    
+    public String toString(){
+        return super.getName();
+    }
+            
+}// end of BJPlayer
