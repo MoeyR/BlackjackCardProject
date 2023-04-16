@@ -70,15 +70,14 @@ public class PlayBJGame extends Game {
                 while(dealer.getDealerHand().cardValue() < 17){
                     dealer.getDealerHand().drawOneCard(deckOfCards);
                     int lastDealerHand = dealer.getDealerHand().getCards().size()-1;
-                    System.out.println("Dealer draw: " + dealer.getDealerHand().getCardFromGroup(lastDealerHand).toString());
+                    //System.out.println("Dealer draw: " + dealer.getDealerHand().getCardFromGroup(lastDealerHand).toString());
                 }
-                System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                //System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
                 
                 
                 if(player_1.getPlayerHand().cardValue() < 21 && dealer.getDealerHand().cardValue() < 21){
                     System.out.printf("Your total cards value is now: %s%n", player_1.getPlayerHand().cardValue() );
                     answer = true;
-                    
                 }else if(player_1.getPlayerHand().cardValue() < 21 && dealer.getDealerHand().cardValue() > 21){
                     //Dealer bust, show dealer's cards
                     System.out.println("Dealer Cards: " + dealer.getDealerHand().toString());
@@ -91,7 +90,6 @@ public class PlayBJGame extends Game {
                     System.out.println("Congratulations! You WIN !!!");
                     break;
                 }else{
-                    System.out.println(" ********************************** ");
                     System.out.println("Sorry, you lost! Try next time!");
                     //debug
                     System.out.println("Your cards value: " + player_1.getPlayerHand().cardValue());
@@ -108,25 +106,42 @@ public class PlayBJGame extends Game {
                 while(dealer.getDealerHand().cardValue() < 17){
                     dealer.getDealerHand().drawOneCard(deckOfCards);
                     int lastDealerHand = dealer.getDealerHand().getCards().size()-1;
-                    System.out.println("Dealer draw: " + dealer.getDealerHand().getCardFromGroup(lastDealerHand).toString());
+                    //System.out.println("Dealer draw: " + dealer.getDealerHand().getCardFromGroup(lastDealerHand).toString());
                 }
-                System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                //System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
                 
-                
-                if(player_1.getPlayerHand().cardValue() < dealer.getDealerHand().cardValue()){
+                if(player_1.getPlayerHand().cardValue() < 21 && dealer.getDealerHand().cardValue() < 21){
                     System.out.println(" ********************************** ");
-                    System.out.println("Dealer bits you!");
-                    System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
-                    System.out.println("Your cards value: " + player_1.getPlayerHand().cardValue());
-                }else if(player_1.getPlayerHand().cardValue() > dealer.getDealerHand().cardValue()){
+                    if(player_1.getPlayerHand().cardValue() < dealer.getDealerHand().cardValue()){
+                        System.out.println("Dealer bits you!");
+                        System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                        System.out.println("Dealer Cards: " + dealer.getDealerHand().toString());
+                        System.out.println("Your cards value: " + player_1.getPlayerHand().cardValue());
+                    }else if (player_1.getPlayerHand().cardValue() > dealer.getDealerHand().cardValue()){
+                        System.out.println(" ********************************** ");
+                        System.out.println("Congratulations! You WIN !!!");
+                        System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                    }else{
+                        System.out.println(" ********************************** ");
+                        System.out.println("Tie! Play again!");
+                        System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                    }
+                }else if(player_1.getPlayerHand().cardValue() < 21 && dealer.getDealerHand().cardValue() > 21){
+                    System.out.println("Dealer Cards: " + dealer.getDealerHand().toString());
+                    System.out.println("Dealer Value: " + dealer.getDealerHand().cardValue());
                     System.out.println(" ********************************** ");
-                    System.out.println("Congratulations! You WIN !!!");
-                    System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
-                    System.exit(0);
+                    System.out.println("Dealer bust. You WIN !!!");
+                    System.exit(0); 
+                }else if(dealer.getDealerHand().cardValue() ==21 && player_1.getPlayerHand().cardValue() != 21){
+                    System.out.println(" ********************************** ");
+                    System.out.println("Sorry, you lost! Try next time!");
+                    System.out.println("Dealer Value: " + dealer.getDealerHand().cardValue());
+                    System.out.println("Dealer Cards: " + dealer.getDealerHand().toString());
+                    break;
                 }else{
-                    System.out.println(" ********************************** ");
                     System.out.println("Tie! Play again!");
                     System.out.println("Dealer cards value: " + dealer.getDealerHand().cardValue());
+                    System.out.println("Dealer Cards: " + dealer.getDealerHand().toString());
                 }
                 break;
             }else{
